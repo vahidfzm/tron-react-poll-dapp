@@ -27,6 +27,12 @@ docker run -it -p 9090:9090 --rm -v $PWD\tronbox\:/tron/tronbox -e "mnemonic=sun
 
 ```
 
+### Some useful local endpoints:
+- **[List on accounts](http://localhost:9090/admin/accounts)**
+
+- **[Get details of a transaction](http://127.0.0.1:9090/wallet/gettransactionbyid?value=the-transaction-id)**
+
+
 ## Compile and Deploy Smart contracts
 
 create a .env file in the tronbox folder
@@ -46,9 +52,11 @@ and to deploy on the Shasta test net
 cd tronbox && source .env && tronbox migrate --reset --network shasta
 
 ```
-
+### Save contract addresses in the javascript file
 `tronPollDappContract` and `tronPollTokenContract` in `src/tronServices/constants.js` should get replaced with your contract addresses.
-
+### Set token address 
+- Call `setToken` method in the poll contract and save the token address in the poll contract
+- Allow the poll contract to spend tokens (by calling the approve method)
 ## Prerequisites
 ```
 npm install
@@ -61,9 +69,10 @@ npm run start
 ```
 
 ## Demo
-[url to demo page](https://vahidfzm.github.io/tron-high-risk-dapp/index.html)
+[url to demo page](https://vahidfzm.github.io/tron-react-poll-dapp/index.html)
 
+Screenshot of the voting page
 ![demo](./demo.png)
 
-PS: The demo-contract is published on Shasta network (a test network in tron blockchain) and to use it, you need to switch to shasta-node in Tronlink wallet. 
+PS: The demo-contract is published on Shasta network (a test network in tron blockchain) and to use it, you need to switch to shasta-node in the Tronlink wallet. 
 
