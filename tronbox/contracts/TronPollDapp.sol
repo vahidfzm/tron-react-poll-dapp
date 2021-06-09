@@ -88,27 +88,29 @@ contract TronPollDapp is Ownable {
     validatePollIndex(pollIndex) 
     afterStartingPoll(pollIndex)
     beforeFinishingPoll(pollIndex)
+    notVotedBefore(pollIndex)
     validateIfPollTokenAssigned
     {
         Poll storage _poll=polls[pollIndex];
         VoteCounter storage _voteCounter=voteCounters[pollIndex];
-        if(!_poll.voters[msg.sender].voted){
-            _poll.voters[msg.sender].voted=true;
-            _poll.voters[msg.sender].votedIndex=answerIndex;
-            if(answerIndex==0){
-                _voteCounter.answer1VoteCounter++;
-            }else if(answerIndex==1){
-                _voteCounter.answer2VoteCounter++;
-            }else if(answerIndex==2){
-                _voteCounter.answer3VoteCounter++;
-            }else if(answerIndex==3){
-                _voteCounter.answer4VoteCounter++;
-            }
-        }
-
+        
         uint256 tokenAllowance=pollToken.allowance(owner,address(this));
         require(tokenAllowance>=16000,"not enough tokens !");
         pollToken.transferFrom(owner,msg.sender,16000);
+
+        _poll.voters[msg.sender].voted=true;
+        _poll.voters[msg.sender].votedIndex=answerIndex;
+        if(answerIndex==0){
+            _voteCounter.answer1VoteCounter++;
+        }else if(answerIndex==1){
+            _voteCounter.answer2VoteCounter++;
+        }else if(answerIndex==2){
+            _voteCounter.answer3VoteCounter++;
+        }else if(answerIndex==3){
+            _voteCounter.answer4VoteCounter++;
+        }
+        
+
 
     }
 
@@ -156,6 +158,15 @@ contract TronPollDapp is Ownable {
         require(
             block.timestamp < _poll.finishDate,
             "This function is callable before finishing the poll."
+        );
+        _;
+    }
+
+    modifier notVotedBefore(uint256 pollIndex) {
+        Poll storage _poll = polls[pollIndex];
+        require(
+            !_poll.voters[msg.sender].voted,
+            "You voted for this poll before!."
         );
         _;
     }
