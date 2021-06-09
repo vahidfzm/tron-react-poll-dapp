@@ -36,9 +36,10 @@ const Home=()=>{
 
     return (
         <Container>
-            {pollArray.map((poll,index)=>(
+            {pollArray.length>0 && pollArray.map((poll,index)=>(
                 <PollItem key={index} poll={poll} onSelect={()=>onSelectHandler(index)}></PollItem>
             ))}
+            {pollArray.length===0 && <h1>There is no Poll on this DAPP.</h1>}
         </Container>
     )
 }
