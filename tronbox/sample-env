@@ -1,2 +1,3 @@
+export PRIVATE_KEY_LOCAL=your private-key on the local test net
 export PRIVATE_KEY_SHASTA=your private-key on the shasta test net
 export PRIVATE_KEY_MAINNET=your private-key on the main net
