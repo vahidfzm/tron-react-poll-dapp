@@ -13,7 +13,7 @@ const getGeneralTronWeb = () => {
 }
 
 const getUserTronWeb = () => {
-    if (window.tronWeb && window.tronWeb.defaultAddress.base58) {
+    if (window && window.tronWeb && window.tronWeb.defaultAddress.base58) {
         return window.tronWeb;
     }
 }
@@ -35,6 +35,10 @@ const tronHexToDecimal = valueInHex => {
     return TronWeb.toDecimal(valueInHex);
 }
 
+const tronHexToAscii = valueInHex => {
+    return TronWeb.toAscii(valueInHex);
+}
+
 
 const getUserTronWallet = () => {
     if (window.tronWeb && window.tronWeb.defaultAddress.base58) {
@@ -42,7 +46,15 @@ const getUserTronWallet = () => {
     }
 }
 
+
+const getTransactionInfo = async (transactionId) => {
+    const tronWeb = getGeneralTronWeb();
+    return tronWeb.trx.getTransactionInfo(transactionId)
+}
+
 module.exports.getGeneralTronWeb = getGeneralTronWeb;
 module.exports.getTronContract = getTronContract;
+module.exports.tronHexToAscii = tronHexToAscii;
 module.exports.tronHexToDecimal = tronHexToDecimal;
 module.exports.getUserTronWallet = getUserTronWallet;
+module.exports.getTransactionInfo = getTransactionInfo;

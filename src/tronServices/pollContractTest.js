@@ -19,11 +19,11 @@ const tronWeb=tronUtils.getGeneralTronWeb();
 
 
 
-const startDate=(new Date('2021-05-22T16:23')).getTime()/1000;
-const finishDate=(new Date('2023-12-23')).getTime()/1000;
-pollContract.createPoll('my secont question','a2','b2','c','d',startDate,finishDate).then(res=>{
-    console.log(res);
-})
+// const startDate=(new Date('2021-06-08T10:52')).getTime()/1000;
+// const finishDate=(new Date('2023-12-23')).getTime()/1000;
+// pollContract.createPoll('my secont question','a2','b2','c','d',startDate,finishDate).then(res=>{
+//     console.log(res);
+// })
 
 
 // ##########################################################################################################
@@ -52,6 +52,6 @@ pollContract.createPoll('my secont question','a2','b2','c','d',startDate,finishD
 // })
 
 
-// pollContract.setToken().then(res=>{
-//     console.log(res);
-// })
+pollContract.setToken().then(res=>{
+    console.log(res);
+})

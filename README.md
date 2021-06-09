@@ -1,7 +1,5 @@
 # Tron-React Poll DAPP
-
-
-This is an open-source Poll DAPP (Decentralized application) on the Tron blockchain 
+This is an open-source Poll DAPP (Decentralized application) on the Tron blockchain. We defined a TRC20 token in this project and use it as a vote-reward (16000 TPT-token as voting-reward for each poll)
 
 
 ## Packages
@@ -56,7 +54,7 @@ cd tronbox && source .env && tronbox migrate --reset --network shasta
 `tronPollDappContract` and `tronPollTokenContract` in `src/tronServices/constants.js` should get replaced with your contract addresses.
 ### Set token address 
 - Call `setToken` method in the poll contract and save the token address in the poll contract
-- Allow the poll contract to spend tokens (by calling the approve method)
+- Allow the poll contract to spend tokens (by calling the `approve` method)
 ## Prerequisites
 ```
 npm install

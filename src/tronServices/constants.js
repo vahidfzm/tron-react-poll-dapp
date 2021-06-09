@@ -1,8 +1,10 @@
+//local
+// const tronPollDappContract="TCvYXmDQFAx1ai9dJudFmZLNuEWyb3WeaB";
+// const tronPollTokenContract="TWSb9ftBuzPoF64HCYKrwyxRLUAHpYSeSu";
 
-// const tronPollDappContract="TPZYT2gNZ2oZ9ayb9gerSTpybtWWxZMKQL";
-// const tronPollTokenContract="TMEXubsxzgtxEd4BS4BKsjnVj2e13s6Vjp";
-const tronPollDappContract="TUDev9xWKSVkgp7ucVYoLdGtvEciLHnuUs";
-const tronPollTokenContract="TZ3VyrCLLiorR91adENYWFdZ6bJyXp4w9t";
+//shasta testnet
+const tronPollDappContract="TJ8MBRtmiArKmMDZPP5itVwesHSbAPCJhY";
+const tronPollTokenContract="TLgt7Zkh56mJvqVFAYyshgvYMqjk14gXSk";
 
 const tronAccounts=[
     {
@@ -48,13 +50,16 @@ const tronAccounts=[
 ];
 
 
-const tronGeneralPublicKey=tronAccounts[7].publicKey;
-const tronGeneralPrivateKey=tronAccounts[7].privateKey;
+const tronGeneralPublicKey=tronAccounts[0].publicKey;
+const tronGeneralPrivateKey=tronAccounts[0].privateKey;
 
 
+//local
 // const tronFullNode="http://localhost:9090/";
 // const tronSolidityNode="http://localhost:9090/";
 // const tronEventServer="http://localhost:9090/";
+
+//shasta testnet
 const tronFullNode="https://api.shasta.trongrid.io";
 const tronSolidityNode="https://api.shasta.trongrid.io";
 const tronEventServer="https://api.shasta.trongrid.io";

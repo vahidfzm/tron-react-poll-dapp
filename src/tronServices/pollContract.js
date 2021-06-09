@@ -53,7 +53,7 @@ const vote=async (pollIndex,answerIndex)=>{
 }
 
 const setToken=async ()=>{
-    let contract=await tronUtils.getTronContract(tronConstants.tronPollDappContract);
+    let contract=await tronUtils.getTronContract(tronConstants.tronPollDappContract,'general');
     try {
         let result=await contract.setToken(tronConstants.tronPollTokenContract).send();
         return result;

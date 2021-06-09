@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import Container from '../Container';
 
 import { getPoll, getVoteCounter, vote } from '../../tronServices/pollContract';
+import { getTransactionInfo, tronHexToAscii } from '../../tronServices/utils';
 
 import Spinner from '../UI/Spinner';
 import Button from '../UI/Button';
@@ -79,13 +80,21 @@ const Poll = (props) => {
     const [selectedAnswer, setSelectedAnswer] = useState(null);
 
     const [voteLoading, setVoteLoading] = useState(false);
+    const [pageLoading, setPageLoading] = useState(false);
 
     const wallet=useSelector(state=>state.wallet);
 
     useEffect(() => {
-        Promise.all([getPoll(pollIndex), getVoteCounter(pollIndex)]).then(result => {
+        setPageLoading(true);
+        Promise.all([getPoll(pollIndex), getVoteCounter(pollIndex)])
+        .then(result => {
+            setPageLoading(false);
             setPoll(result[0]);
             setVoteCounter(result[1]);
+        })
+        .catch(error=>{
+            setPageLoading(false);
+            console.log(error);
         })
 
     }, [pollIndex]);
@@ -101,10 +110,34 @@ const Poll = (props) => {
         console.log(selectedAnswer)
         setVoteLoading(true);
         vote(pollIndex, (selectedAnswer - 1))
-            .then(res => {
-                setVoteLoading(false);
-                console.log(res)
-            })
+            .then(transactionId => {
+                console.log(transactionId)
+                
+                setTimeout(()=>{
+
+                    getTransactionInfo(transactionId).then(transactionResult=>{
+                        setVoteLoading(false);
+                        console.log(transactionResult)
+                        if(transactionResult['result']==='FAILED'){
+                            let transactionMessage='';
+                            transactionMessage=transactionMessage + tronHexToAscii(transactionResult['resMessage']) + ', ';
+                            transactionMessage=transactionMessage + tronHexToAscii(transactionResult['contractResult'][0]);
+
+                            transactionMessage = transactionMessage.replace(/[^\w\s]/gi, '');
+
+                            swal('Error',transactionMessage,'error');
+                        }
+    
+                    })
+                    .catch(error => {
+                        setVoteLoading(false);
+                        console.log(error)
+                    })
+
+                },10000);
+
+
+              })
             .catch(error => {
                 setVoteLoading(false);
                 console.log(error)
@@ -130,7 +163,12 @@ const Poll = (props) => {
                         </PollDates>
                         {[1, 2, 3, 4].map(answerNumber => (
                             <PollAnswer key={answerNumber} onClick={() => setSelectedAnswer(answerNumber)}>
-                                <AnswerVoteCount size={voteCounter && Math.floor(voteCounter[`answer${answerNumber}VoteCounter`] * 100 / (voteCounter['answer1VoteCounter'] + voteCounter['answer2VoteCounter'] + voteCounter['answer3VoteCounter'] + voteCounter['answer4VoteCounter']))}>
+                                <AnswerVoteCount size={
+                                    voteCounter && 
+                                    voteCounter[`answer${answerNumber}VoteCounter`]>0 ?  
+                                    Math.floor(voteCounter[`answer${answerNumber}VoteCounter`] * 100 / (voteCounter['answer1VoteCounter'] + voteCounter['answer2VoteCounter'] + voteCounter['answer3VoteCounter'] + voteCounter['answer4VoteCounter']))
+                                    : 0
+                                    }>
                                     <span className="color">&nbsp;</span>
                                     <span className="text">
                                         {voteCounter ? voteCounter[`answer${answerNumber}VoteCounter`] : 'no '} Vote{voteCounter && voteCounter[`answer${answerNumber}VoteCounter`] > 1 ? 's' : ''}
@@ -159,6 +197,7 @@ const Poll = (props) => {
                         </div>
                     </div>
                 )}
+                {pageLoading && <Spinner size="5" />}
 
             </PollWrapper>
         </Container>
