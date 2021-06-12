@@ -2,10 +2,11 @@ import React, {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 
 import PollItem from '../PollItem';
-import {getPoll, getPollCount} from '../../tronServices/pollContract';
 
 import Container from '../Container';
 import Spinner from '../UI/Spinner';
+
+const {getPoll, getPollCount}=require('../../tronServices/pollContract');
 
 
 const Home=()=>{

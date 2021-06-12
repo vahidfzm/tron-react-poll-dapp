@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import styled from 'styled-components';
 
-import { getUserTronWallet } from '../tronServices/utils';
+const { getUserTronWallet }=require('../tronServices/utils');
 
 const MenuStyled = styled.div`
   box-sizing: border-box;

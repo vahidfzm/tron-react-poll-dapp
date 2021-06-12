@@ -8,12 +8,12 @@ import { useSelector } from 'react-redux';
 
 import Container from '../Container';
 
-import { getPoll, getVoteCounter, vote } from '../../tronServices/pollContract';
-import { getTransactionInfo, tronHexToAscii } from '../../tronServices/utils';
 
 import Spinner from '../UI/Spinner';
 import Button from '../UI/Button';
 
+const { getPoll, getVoteCounter, vote }=require('../../tronServices/pollContract');
+const { getTransactionInfo, tronHexToAscii }=require('../../tronServices/utils');
 
 
 

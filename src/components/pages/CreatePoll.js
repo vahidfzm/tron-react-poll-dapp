@@ -1,3 +1,4 @@
+
 import swal from 'sweetalert';
 
 import { useState } from 'react';
@@ -7,11 +8,11 @@ import { useSelector } from 'react-redux';
 
 import styled from 'styled-components';
 
-import {createPoll} from '../../tronServices/pollContract';
 
 import Container from '../Container';
 import Button from '../UI/Button';
 
+const createPoll=require('../../tronServices/pollContract').createPoll;
 
 const StyledItemWrapper = styled.div`
   display: flex;

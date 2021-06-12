@@ -1,12 +1,12 @@
 //local
-// const tronPollDappContract="TCvYXmDQFAx1ai9dJudFmZLNuEWyb3WeaB";
-// const tronPollTokenContract="TWSb9ftBuzPoF64HCYKrwyxRLUAHpYSeSu";
+// export const tronPollDappContract="TCvYXmDQFAx1ai9dJudFmZLNuEWyb3WeaB";
+// export const tronPollTokenContract="TWSb9ftBuzPoF64HCYKrwyxRLUAHpYSeSu";
 
 //shasta testnet
-const tronPollDappContract="TJ8MBRtmiArKmMDZPP5itVwesHSbAPCJhY";
-const tronPollTokenContract="TLgt7Zkh56mJvqVFAYyshgvYMqjk14gXSk";
+export const tronPollDappContract="TJ8MBRtmiArKmMDZPP5itVwesHSbAPCJhY";
+export const tronPollTokenContract="TLgt7Zkh56mJvqVFAYyshgvYMqjk14gXSk";
 
-const tronAccounts=[
+export const tronAccounts=[
     {
         publicKey:"TG31Eya5GywMYV2rwq3rwGbep4eoykWREP",
         privateKey:"d8db4dfed48fc23884a1bde2e654cf7e6498ad023892ddbafb3c013573e2bd74"
@@ -50,29 +50,17 @@ const tronAccounts=[
 ];
 
 
-const tronGeneralPublicKey=tronAccounts[0].publicKey;
-const tronGeneralPrivateKey=tronAccounts[0].privateKey;
+export const tronGeneralPublicKey=tronAccounts[0].publicKey;
+export const tronGeneralPrivateKey=tronAccounts[0].privateKey;
 
 
 //local
-// const tronFullNode="http://localhost:9090/";
-// const tronSolidityNode="http://localhost:9090/";
-// const tronEventServer="http://localhost:9090/";
+// const export tronFullNode="http://localhost:9090/";
+//export const tronSolidityNode="http://localhost:9090/";
+//export const tronEventServer="http://localhost:9090/";
 
 //shasta testnet
-const tronFullNode="https://api.shasta.trongrid.io";
-const tronSolidityNode="https://api.shasta.trongrid.io";
-const tronEventServer="https://api.shasta.trongrid.io";
+export const tronFullNode="https://api.shasta.trongrid.io";
+export const tronSolidityNode="https://api.shasta.trongrid.io";
+export const tronEventServer="https://api.shasta.trongrid.io";
 
-
-module.exports.tronPollDappContract=tronPollDappContract;
-module.exports.tronPollTokenContract=tronPollTokenContract;
-module.exports.tronAccounts=tronAccounts;
-
-module.exports.tronFullNode=tronFullNode;
-module.exports.tronSolidityNode=tronSolidityNode;
-module.exports.tronEventServer=tronEventServer;
-
-
-module.exports.tronGeneralPublicKey=tronGeneralPublicKey;
-module.exports.tronGeneralPrivateKey=tronGeneralPrivateKey;

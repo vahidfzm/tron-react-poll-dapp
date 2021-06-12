@@ -3,7 +3,7 @@ const TronWeb = require('tronweb')
 
 const tronConstants = require('./constants');
 
-const getGeneralTronWeb = () => {
+export const getGeneralTronWeb = () => {
     const HttpProvider = TronWeb.providers.HttpProvider;
     const fullNode = new HttpProvider(tronConstants.tronFullNode);
     const solidityNode = new HttpProvider(tronConstants.tronSolidityNode);
@@ -20,7 +20,7 @@ const getUserTronWeb = () => {
 
 
 
-const getTronContract = async (contractAddress, userOrGeneral) => {
+export const getTronContract = async (contractAddress, userOrGeneral) => {
     let tronWeb;
     if (userOrGeneral === 'general') {
         tronWeb = getGeneralTronWeb();
@@ -31,30 +31,24 @@ const getTronContract = async (contractAddress, userOrGeneral) => {
 }
 
 
-const tronHexToDecimal = valueInHex => {
+export const tronHexToDecimal = valueInHex => {
     return TronWeb.toDecimal(valueInHex);
 }
 
-const tronHexToAscii = valueInHex => {
+export const tronHexToAscii = valueInHex => {
     return TronWeb.toAscii(valueInHex);
 }
 
 
-const getUserTronWallet = () => {
+export const getUserTronWallet = () => {
     if (window.tronWeb && window.tronWeb.defaultAddress.base58) {
         return window.tronWeb.defaultAddress.base58;
     }
 }
 
 
-const getTransactionInfo = async (transactionId) => {
+export const getTransactionInfo = async (transactionId) => {
     const tronWeb = getGeneralTronWeb();
     return tronWeb.trx.getTransactionInfo(transactionId)
 }
 
-module.exports.getGeneralTronWeb = getGeneralTronWeb;
-module.exports.getTronContract = getTronContract;
-module.exports.tronHexToAscii = tronHexToAscii;
-module.exports.tronHexToDecimal = tronHexToDecimal;
-module.exports.getUserTronWallet = getUserTronWallet;
-module.exports.getTransactionInfo = getTransactionInfo;

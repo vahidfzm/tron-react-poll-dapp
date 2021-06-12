@@ -4,7 +4,7 @@ const tronConstants=require('./constants');
 
 
 
-const createPoll=async (question,answer1,answer2,answer3,answer4,startDate,finishDate)=>{
+export const createPoll=async (question,answer1,answer2,answer3,answer4,startDate,finishDate)=>{
     let contract=await tronUtils.getTronContract(tronConstants.tronPollDappContract,'user');
     try {
         
@@ -15,7 +15,7 @@ const createPoll=async (question,answer1,answer2,answer3,answer4,startDate,finis
     }
 }
 
-const getPoll=async (pollIndex)=>{
+export const getPoll=async (pollIndex)=>{
     let contract=await tronUtils.getTronContract(tronConstants.tronPollDappContract,'general');
     let poll= await contract.polls(pollIndex).call();
     poll.startDate=tronUtils.tronHexToDecimal(poll.startDate['_hex']);
@@ -23,14 +23,14 @@ const getPoll=async (pollIndex)=>{
     return poll;
 }
 
-const getPollCount=async ()=>{
+export const getPollCount=async ()=>{
     let contract=await tronUtils.getTronContract(tronConstants.tronPollDappContract,'general');
     let result= await contract.getPollCount().call();
     return tronUtils.tronHexToDecimal(result['_hex']);
 }
 
 
-const getVoteCounter=async (pollIndex)=>{
+export const getVoteCounter=async (pollIndex)=>{
     let contract=await tronUtils.getTronContract(tronConstants.tronPollDappContract,'general');
     let voteCounter= await contract.voteCounters(pollIndex).call();
     voteCounter.answer1VoteCounter=tronUtils.tronHexToDecimal(voteCounter.answer1VoteCounter['_hex']);
@@ -42,7 +42,7 @@ const getVoteCounter=async (pollIndex)=>{
 
 
 
-const vote=async (pollIndex,answerIndex)=>{
+export const vote=async (pollIndex,answerIndex)=>{
     let contract=await tronUtils.getTronContract(tronConstants.tronPollDappContract,'user');
     try {
         let result=await contract.vote(pollIndex,answerIndex).send();
@@ -52,7 +52,7 @@ const vote=async (pollIndex,answerIndex)=>{
     }
 }
 
-const setToken=async ()=>{
+export const setToken=async ()=>{
     let contract=await tronUtils.getTronContract(tronConstants.tronPollDappContract,'general');
     try {
         let result=await contract.setToken(tronConstants.tronPollTokenContract).send();
@@ -62,11 +62,3 @@ const setToken=async ()=>{
     }
 }
 
-
-
-module.exports.createPoll=createPoll;
-module.exports.getPoll=getPoll;
-module.exports.vote=vote;
-module.exports.getVoteCounter=getVoteCounter;
-module.exports.getPollCount=getPollCount;
-module.exports.setToken=setToken;
