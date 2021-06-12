@@ -33,19 +33,20 @@ docker run -it -p 9090:9090 --rm -v $PWD\tronbox\:/tron/tronbox -e "mnemonic=sun
 
 ## Compile and Deploy Smart contracts
 
-create a .env file in the tronbox folder
+create a .env file in the tronbox folder and add your real private-keys in the .env file
+
 
 ```shell
 cd tronbox && cp sample-env .env 
 ```
-Add your real private-keys in the .env file
 
+Deploy on the local net
 
 ```shell
 cd tronbox && source .env && tronbox migrate --reset 
 
 ```
-and to deploy on the Shasta test net
+Deploy on the Shasta test net
 ```shell
 cd tronbox && source .env && tronbox migrate --reset --network shasta
 
