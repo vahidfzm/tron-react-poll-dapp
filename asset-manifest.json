@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/tron-react-poll-dapp/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/tron-react-poll-dapp/static/js/main.2fde4917.chunk.js",
+    "main.js.map": "/tron-react-poll-dapp/static/js/main.2fde4917.chunk.js.map",
+    "runtime-main.js": "/tron-react-poll-dapp/static/js/runtime-main.b9e99f97.js",
+    "runtime-main.js.map": "/tron-react-poll-dapp/static/js/runtime-main.b9e99f97.js.map",
+    "static/js/2.a9a66e6d.chunk.js": "/tron-react-poll-dapp/static/js/2.a9a66e6d.chunk.js",
+    "static/js/2.a9a66e6d.chunk.js.map": "/tron-react-poll-dapp/static/js/2.a9a66e6d.chunk.js.map",
+    "index.html": "/tron-react-poll-dapp/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/tron-react-poll-dapp/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.a9a66e6d.chunk.js.LICENSE.txt": "/tron-react-poll-dapp/static/js/2.a9a66e6d.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b9e99f97.js",
+    "static/js/2.a9a66e6d.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.2fde4917.chunk.js"
+  ]
+}
