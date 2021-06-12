@@ -17,7 +17,7 @@ import NotFound from './components/pages/NotFound';
 function App() {
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter basename={'/tron-react-poll-dapp'}>
 
       <Menu />
       <Switch>
