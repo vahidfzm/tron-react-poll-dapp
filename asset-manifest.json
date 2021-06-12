@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/tron-react-poll-dapp/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/tron-react-poll-dapp/static/js/main.f054029b.chunk.js",
-    "main.js.map": "/tron-react-poll-dapp/static/js/main.f054029b.chunk.js.map",
+    "main.js": "/tron-react-poll-dapp/static/js/main.54fc46a7.chunk.js",
+    "main.js.map": "/tron-react-poll-dapp/static/js/main.54fc46a7.chunk.js.map",
     "runtime-main.js": "/tron-react-poll-dapp/static/js/runtime-main.b9e99f97.js",
     "runtime-main.js.map": "/tron-react-poll-dapp/static/js/runtime-main.b9e99f97.js.map",
     "static/js/2.3679b6e8.chunk.js": "/tron-react-poll-dapp/static/js/2.3679b6e8.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.b9e99f97.js",
     "static/js/2.3679b6e8.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.f054029b.chunk.js"
+    "static/js/main.54fc46a7.chunk.js"
   ]
 }
