@@ -67,7 +67,7 @@ npm run start
 ```
 
 ## Demo
-[url to demo page](https://vahidfzm.github.io/tron-react-poll-dapp/index.html)
+[url to demo page](https://vahidfzm.github.io/tron-react-poll-dapp/)
 
 Screenshot of the voting page
 ![demo](./demo.png)
