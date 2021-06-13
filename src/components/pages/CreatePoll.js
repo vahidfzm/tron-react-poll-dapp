@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
+import Spinner from '../UI/Spinner';
 
 import styled from 'styled-components';
 
@@ -26,6 +27,7 @@ const StyledItemWrapper = styled.div`
 const CreatePoll = () => {
 
     const history=useHistory();
+    const [pollLoading, setPollLoading] = useState(false);
     const wallet=useSelector(state=>state.wallet);
 
 
@@ -81,6 +83,7 @@ const CreatePoll = () => {
         payload.startDate=Math.floor(new Date(payload.startDate).getTime()/1000)
         payload.finishDate=Math.floor(new Date(payload.finishDate).getTime()/1000)
 
+        setPollLoading(true);
         createPoll(
             payload.question,
             payload.answer1,
@@ -89,13 +92,22 @@ const CreatePoll = () => {
             payload.answer4,
             payload.startDate,
             payload.finishDate
-            ).then(res=>{
+            ).then(transactionId=>{
+                
+                setPollLoading(false);
+
+                //check if confirmation declined by user
+                if(!transactionId){
+                    return;
+                }
+
+                //TODO: check if the transaction failed or not
                 history.push('/')
             })
             .catch(error=>{
+                setPollLoading(false);
                 console.log(error)
             })
-        // console.log(payload)
     }
 
     return (
@@ -140,8 +152,8 @@ const CreatePoll = () => {
             </StyledItemWrapper>
 
 
-            <Button onClick={() => onSaveHandler()} disabled={!validate()}>
-                Save                
+            <Button onClick={() => onSaveHandler()} disabled={!validate() || pollLoading}>
+                {pollLoading ? <Spinner size="1" /> : 'Save'}                
             </Button>
 
 
