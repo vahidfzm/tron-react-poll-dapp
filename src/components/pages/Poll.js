@@ -99,6 +99,19 @@ const Poll = (props) => {
 
     }, [pollIndex]);
 
+    
+    const loadVoteCounter=()=>{
+        getVoteCounter(pollIndex)
+        .then(_voteCounter=>{
+            setVoteLoading(false);
+            setVoteCounter(_voteCounter)
+        })
+        .catch(error=>{
+            setVoteLoading(false);
+            console.log(error);
+        })
+    }
+
 
     const onVoteHandler = () => {
 
@@ -111,14 +124,19 @@ const Poll = (props) => {
         setVoteLoading(true);
         vote(pollIndex, (selectedAnswer - 1))
             .then(transactionId => {
-                console.log(transactionId)
-                
+
+                //check if confirmation declined by user
+                if(!transactionId){
+                    setVoteLoading(false);
+                    return;
+                }
+
                 setTimeout(()=>{
 
                     getTransactionInfo(transactionId).then(transactionResult=>{
-                        setVoteLoading(false);
                         console.log(transactionResult)
                         if(transactionResult['result']==='FAILED'){
+                            setVoteLoading(false);
                             let transactionMessage='';
                             transactionMessage=transactionMessage + tronHexToAscii(transactionResult['resMessage']) + ', ';
                             transactionMessage=transactionMessage + tronHexToAscii(transactionResult['contractResult'][0]);
@@ -127,6 +145,8 @@ const Poll = (props) => {
 
                             swal('Error',transactionMessage,'error');
                         }
+
+                        loadVoteCounter()
     
                     })
                     .catch(error => {

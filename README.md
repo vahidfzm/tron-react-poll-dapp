@@ -73,5 +73,5 @@ npm run start
 Screenshot of the voting page
 ![demo](./demo.png)
 
-PS: The demo-contract is published on Shasta network (a test network in tron blockchain) and to use it, you need to switch to shasta-node in the Tronlink wallet. 
+PS: The demo-contract is published on Shasta network (a test network on Tron blockchain) and to use it, you need to switch to shasta-node in the Tronlink wallet. 
 
