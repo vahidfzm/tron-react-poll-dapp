@@ -12,8 +12,8 @@ import Container from '../Container';
 import Spinner from '../UI/Spinner';
 import Button from '../UI/Button';
 
-const { getPoll, getVoteCounter, vote }=require('../../tronServices/pollContract');
-const { getTransactionInfo, tronHexToAscii }=require('../../tronServices/utils');
+const { getPoll, getVoteCounter, vote } = require('../../tronServices/pollContract');
+const { getUnconfirmedTransactionInfo, tronHexToAscii } = require('../../tronServices/utils');
 
 
 
@@ -82,82 +82,96 @@ const Poll = (props) => {
     const [voteLoading, setVoteLoading] = useState(false);
     const [pageLoading, setPageLoading] = useState(false);
 
-    const wallet=useSelector(state=>state.wallet);
+    const wallet = useSelector(state => state.wallet);
 
     useEffect(() => {
         setPageLoading(true);
         Promise.all([getPoll(pollIndex), getVoteCounter(pollIndex)])
-        .then(result => {
-            setPageLoading(false);
-            setPoll(result[0]);
-            setVoteCounter(result[1]);
-        })
-        .catch(error=>{
-            setPageLoading(false);
-            console.log(error);
-        })
+            .then(result => {
+                setPageLoading(false);
+                setPoll(result[0]);
+                setVoteCounter(result[1]);
+            })
+            .catch(error => {
+                setPageLoading(false);
+                console.log(error);
+            })
 
     }, [pollIndex]);
 
-    
-    const loadVoteCounter=()=>{
+
+    const loadVoteCounter = () => {
         getVoteCounter(pollIndex)
-        .then(_voteCounter=>{
-            setVoteLoading(false);
-            setVoteCounter(_voteCounter)
-        })
-        .catch(error=>{
-            setVoteLoading(false);
-            console.log(error);
-        })
+            .then(_voteCounter => {
+                setVoteLoading(false);
+                setVoteCounter(_voteCounter)
+            })
+            .catch(error => {
+                setVoteLoading(false);
+                console.log(error);
+            })
     }
 
 
     const onVoteHandler = () => {
 
-        if(!wallet){
-            swal('Error','Connect to your wallet!','error');
+        if (!wallet) {
+            swal('Error', 'Connect to your wallet!', 'error');
             return;
         }
 
-        console.log(selectedAnswer)
+
+    
+        if (poll.startDate>(new Date().getTime()/1000)) {
+            swal('Error', 'The poll has not started yet.', 'error');
+            return;
+        }
+    
+        if (poll.finishDate<(new Date().getTime()/1000)) {
+            swal('Error', 'Time to participate in this poll has expired.', 'error');
+            return;
+        }
+
         setVoteLoading(true);
         vote(pollIndex, (selectedAnswer - 1))
             .then(transactionId => {
 
+                console.log('transactionId',transactionId)
+
                 //check if confirmation declined by user
-                if(!transactionId){
+                if (!transactionId) {
                     setVoteLoading(false);
                     return;
                 }
 
                 setTimeout(()=>{
 
-                    getTransactionInfo(transactionId).then(transactionResult=>{
-                        console.log(transactionResult)
-                        if(transactionResult['result']==='FAILED'){
+                    getUnconfirmedTransactionInfo(transactionId).then(transactionInfo => {
+                        console.log('transactionInfo',transactionInfo)
+                        if (transactionInfo['result'] === 'FAILED') {
                             setVoteLoading(false);
-                            let transactionMessage='';
-                            transactionMessage=transactionMessage + tronHexToAscii(transactionResult['resMessage']) + ', ';
-                            transactionMessage=transactionMessage + tronHexToAscii(transactionResult['contractResult'][0]);
-
+                            let transactionMessage = '';
+                            transactionMessage = transactionMessage + tronHexToAscii(transactionInfo['resMessage']) + ', ';
+                            transactionMessage = transactionMessage + tronHexToAscii(transactionInfo['contractResult'][0]);
+    
                             transactionMessage = transactionMessage.replace(/[^\w\s]/gi, '');
-
-                            swal('Error',transactionMessage,'error');
+    
+                            swal('Error', transactionMessage, 'error');
                         }
-
+    
                         loadVoteCounter()
     
                     })
-                    .catch(error => {
-                        setVoteLoading(false);
-                        console.log(error)
-                    })
-
-                },10000);
+                        .catch(error => {
+                            setVoteLoading(false);
+                            console.log(error)
+                        })
 
 
-              })
+                },5000)
+                
+
+            })
             .catch(error => {
                 setVoteLoading(false);
                 console.log(error)
@@ -184,11 +198,11 @@ const Poll = (props) => {
                         {[1, 2, 3, 4].map(answerNumber => (
                             <PollAnswer key={answerNumber} onClick={() => setSelectedAnswer(answerNumber)}>
                                 <AnswerVoteCount size={
-                                    voteCounter && 
-                                    voteCounter[`answer${answerNumber}VoteCounter`]>0 ?  
-                                    Math.floor(voteCounter[`answer${answerNumber}VoteCounter`] * 100 / (voteCounter['answer1VoteCounter'] + voteCounter['answer2VoteCounter'] + voteCounter['answer3VoteCounter'] + voteCounter['answer4VoteCounter']))
-                                    : 0
-                                    }>
+                                    voteCounter &&
+                                        voteCounter[`answer${answerNumber}VoteCounter`] > 0 ?
+                                        Math.floor(voteCounter[`answer${answerNumber}VoteCounter`] * 100 / (voteCounter['answer1VoteCounter'] + voteCounter['answer2VoteCounter'] + voteCounter['answer3VoteCounter'] + voteCounter['answer4VoteCounter']))
+                                        : 0
+                                }>
                                     <span className="color">&nbsp;</span>
                                     <span className="text">
                                         {voteCounter ? voteCounter[`answer${answerNumber}VoteCounter`] : 'no '} Vote{voteCounter && voteCounter[`answer${answerNumber}VoteCounter`] > 1 ? 's' : ''}

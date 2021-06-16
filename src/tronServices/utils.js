@@ -52,3 +52,8 @@ export const getTransactionInfo = async (transactionId) => {
     return tronWeb.trx.getTransactionInfo(transactionId)
 }
 
+export const getUnconfirmedTransactionInfo = async (transactionId) => {
+    const tronWeb = getGeneralTronWeb();
+    return tronWeb.trx.getUnconfirmedTransactionInfo(transactionId)
+}
+
