@@ -71,7 +71,7 @@ npm run start
 [live demo](https://vahidfzm.github.io/tron-react-poll-dapp/)
 
 To test the demo version:
-- Install [Tronlinc](https://chrome.google.com/webstore/detail/tronlink%EF%BC%88%E6%B3%A2%E5%AE%9D%E9%92%B1%E5%8C%85%EF%BC%89/ibnejdfjmmkpcnlpebklmnkoeoihofec) extension onChrome.
+- Install [Tronlink](https://chrome.google.com/webstore/detail/tronlink%EF%BC%88%E6%B3%A2%E5%AE%9D%E9%92%B1%E5%8C%85%EF%BC%89/ibnejdfjmmkpcnlpebklmnkoeoihofec) extension on Chrome.
 - Login and switch on Shasta testnet.
 - Get some test coins from [Shasta faucet](https://www.trongrid.io/shasta)
 - Try to create a poll or vote on an existing poll (you will receive 16000 TPT tokens on each voting !!).
