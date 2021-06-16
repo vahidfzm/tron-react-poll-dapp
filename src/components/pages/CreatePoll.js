@@ -18,9 +18,13 @@ const createPoll=require('../../tronServices/pollContract').createPoll;
 const StyledItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height:76px;
+  height:82px;
   input{
     height:36px;
+  }
+  div.error{
+    color:red;
+    font-size:10px;
   }
 `;
 
@@ -112,6 +116,7 @@ const CreatePoll = () => {
 
     return (
         <Container>
+            <h2>Create a Poll</h2>
 
             {['question', 'answer1', 'answer2', 'answer3', 'answer4'].map(item => (
                 <StyledItemWrapper key={item}>
@@ -137,6 +142,7 @@ const CreatePoll = () => {
                     onChange={event => handleChange('startDate', event.target.value)}
                     id="start-date"
                 />
+                {(poll.startDate && poll.startDate<(new Date().toISOString().slice(0,10))) && <div className="error">Minimum value for this field is today </div>}
             </StyledItemWrapper>
 
             <StyledItemWrapper >
@@ -149,6 +155,8 @@ const CreatePoll = () => {
                     onChange={event => handleChange('finishDate', event.target.value)}
                     id="finish-date"
                 />
+                {(poll.startDate && poll.finishDate && poll.finishDate<poll.startDate) && <div className="error">Finish date should be after Start date </div>}
+
             </StyledItemWrapper>
 
 
