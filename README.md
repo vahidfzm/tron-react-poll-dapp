@@ -1,5 +1,5 @@
 # Tron-React Poll DAPP
-This is an open-source Poll DAPP (Decentralized application) on the Tron blockchain. We defined a TRC20 token in this project and use it as a vote-reward (16000 TPT-token as voting-reward for each poll)
+This is an open-source Poll DAPP (Decentralized application) on the Tron blockchain. We defined a TRC20 token in this project and use it as a vote-reward (16000 TPT-token as voting-reward for each voting).
 
 
 ## Packages
@@ -68,10 +68,17 @@ npm run start
 ```
 
 ## Demo
-[url to demo page](https://vahidfzm.github.io/tron-react-poll-dapp/)
+[live demo](https://vahidfzm.github.io/tron-react-poll-dapp/)
+
+To test the demo version:
+- Install [Tronlinc](https://chrome.google.com/webstore/detail/tronlink%EF%BC%88%E6%B3%A2%E5%AE%9D%E9%92%B1%E5%8C%85%EF%BC%89/ibnejdfjmmkpcnlpebklmnkoeoihofec) extension onChrome.
+- Login and switch on Shasta testnet.
+- Get some test coins from [Shasta faucet](https://www.trongrid.io/shasta)
+- Try to create a poll or vote on an existing poll (you will receive 16000 TPT tokens on each voting !!).
+
+
 
 Screenshot of the voting page
 ![demo](./demo.png)
 
-PS: The demo-contract is published on Shasta network (a test network on Tron blockchain) and to use it, you need to switch to shasta-node in the Tronlink wallet. 
 
